@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Order } from '../order';
 import { OrderService } from '../order.service';
@@ -18,10 +18,10 @@ export class ReceiptComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.forEach((value: Params) =>{
+    this.route.params.forEach((value: Params) => {
       let id = value['id'];
       this.order = this.orderService.getOrder(id);
-    })
+    });
   }
 
 }

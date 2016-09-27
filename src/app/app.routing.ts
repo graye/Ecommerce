@@ -2,7 +2,9 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ReceiptComponent } from './receipt/receipt.component';
-import { ReceiptSelectorComponent } from './receipt-selector/receipt-selector.component'
+import { ReceiptSelectorComponent } from './receipt-selector/receipt-selector.component';
+
+import { AboutComponent } from './about/about.component';
 
 const appRoutes: Routes = [
     {
@@ -17,11 +19,15 @@ const appRoutes: Routes = [
     {
         path: 'receipt/:id',
         component: ReceiptComponent
-    }
-    /*{
+    },
+    {
         path: 'receipt',
-        component: ReceiptComponent
-    },*/
+        component: ReceiptSelectorComponent
+    },
+    {
+        path: 'about',
+        component: AboutComponent
+    },
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
