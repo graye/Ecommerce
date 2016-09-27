@@ -7,18 +7,26 @@ import { AppComponent } from './app.component';
 import { TotalPipePipe } from './total-pipe.pipe';
 import { TaxPipePipe } from './tax-pipe.pipe';
 
+import { OrderService } from "./order.service";
+import { ReceiptComponent } from './receipt/receipt.component';
+import { ReceiptSelectorComponent } from './receipt-selector/receipt-selector.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     TotalPipePipe,
-    TaxPipePipe
+    TaxPipePipe,
+    ReceiptComponent,
+    ReceiptSelectorComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [
+    OrderService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
