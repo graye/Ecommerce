@@ -19,13 +19,16 @@ const ORDERS: Array<Order> = [
         new OrderItem('F', 1, 350)
       ])];
 
+
+const LOCAL_KEY: string = "order_key";
+
 @Injectable()
 export class OrderService {
 
-  orders: Array<Order>;
+  private _orders: Array<Order>;
 
   constructor() {
-    this.orders = ORDERS;
+    this.load();
    }
 
   getOrder(id: string) {
@@ -40,6 +43,41 @@ export class OrderService {
   }
 
   getAllOrder(): Array<Order> {
-    return this.orders;
+    return this._orders;
+  }
+
+  load(): Array<Order> {
+    let datastring = localStorage[LOCAL_KEY];
+    let result;
+    if(!datastring) {
+      this._orders = ORDERS;
+      this.save();
+    } else {
+      result = JSON.parse(datastring);
+      this._orders = this.loadData(result);
+    }
+
+    return this._orders;
+  }
+
+  save(): void {
+    var jsonString = JSON.stringify(this._orders);
+    localStorage[LOCAL_KEY] = jsonString;
+  }
+
+  loadData(orders_json: Array<any>) {
+    let orders: Array<Order> = [];
+    orders_json.forEach((orderItem: any, index: number, arr: any[]) => {
+      let items: Array<OrderItem> = [];
+      orderItem.items.forEach((item: OrderItem, itemIndex: number, itemArray: Array<OrderItem>) => {
+        items.push(new OrderItem(item.item, item.quantity, item.unit_price));
+      });
+
+      let order = new Order(items, new Date(orderItem.create_time));
+      order.id = orderItem.id;
+      orders.push(order);
+    });
+
+    return orders;
   }
 }
