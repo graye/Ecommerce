@@ -1,4 +1,4 @@
-<h1>Date {{order.create_time | date:'fullDate'}}</h1>
+<h1>Date {{order?.create_time | date:'fullDate'}}</h1>
 <div>
   <table class='table table-bordered'>
     <tr>
@@ -8,7 +8,7 @@
       <th>Total</th>
     </tr>
     <tbody>
-      <tr *ngFor="let item of order.items">
+      <tr *ngFor="let item of order?.items">
         <td>{{item.item}}</td>
         <td>{{item.quantity}}</td>
         <td>{{item.unit_price | currency:'MYR'}}</td>
@@ -16,15 +16,15 @@
       </tr>
       <tr>
         <td colspan="3" id='table-total-text'>Total</td>
-        <td>{{order.items | totalPipe | currency:'MYR'}}</td>
+        <td>{{order?.items | totalPipe | currency:'MYR'}}</td>
       </tr>
       <tr>
         <td colspan="3" id='table-total-text'>Tax</td>
-        <td>{{order.items | totalPipe | taxPipe:6 | currency:'MYR'}}</td>
+        <td>{{order?.items | totalPipe | taxPipe:6 | currency:'MYR'}}</td>
       </tr>
       <tr>
         <td colspan="3" id='table-total-text'>Total</td>
-        <td>{{((order.items | totalPipe) + (order.items | totalPipe | taxPipe:6)) | currency:'MYR'}}</td>
+        <td>{{((order?.items | totalPipe) + (order?.items | totalPipe | taxPipe:6)) | currency:'MYR'}}</td>
       </tr>
     </tbody>
   </table>

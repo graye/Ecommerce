@@ -15,9 +15,13 @@ const appRoutes: Routes = [
         component: ReceiptSelectorComponent
     },
     {
+        path: 'receipt/:id',
+        component: ReceiptComponent
+    }
+    /*{
         path: 'receipt',
         component: ReceiptComponent
-    },
+    },*/
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
