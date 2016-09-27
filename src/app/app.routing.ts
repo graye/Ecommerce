@@ -6,6 +6,11 @@ import { ReceiptSelectorComponent } from './receipt-selector/receipt-selector.co
 
 const appRoutes: Routes = [
     {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full'
+    },
+    {
         path: 'home',
         component: ReceiptSelectorComponent
     },
@@ -14,3 +19,5 @@ const appRoutes: Routes = [
         component: ReceiptComponent
     },
 ];
+
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

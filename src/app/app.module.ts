@@ -11,6 +11,8 @@ import { OrderService } from "./order.service";
 import { ReceiptComponent } from './receipt/receipt.component';
 import { ReceiptSelectorComponent } from './receipt-selector/receipt-selector.component';
 
+import { routing } from './app.routing';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,8 @@ import { ReceiptSelectorComponent } from './receipt-selector/receipt-selector.co
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    routing
   ],
   providers: [
     OrderService
