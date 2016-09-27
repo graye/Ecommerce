@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderService } from '../order.service';
+import { Order } from '../order';
 
 @Component({
   selector: 'app-receipt-selector',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReceiptSelectorComponent implements OnInit {
 
-  constructor() { }
+  orders: Array<Order>;
+
+  constructor(orderService: OrderService) {
+    this.orders = orderService.getAllOrder();
+   }
 
   ngOnInit() {
   }
