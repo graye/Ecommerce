@@ -1,9 +1,10 @@
 <div class="row">
-  <div class="col-md-11"></div>
+  <div class="col-md-9"></div>
+  <div class="col-md-2"><button (click)="loadFromUrl()" class="btn btn-default">Reload from URL</button></div>
   <div class="col-md-1"><button routerLink="../editor" class="btn btn-primary">Create</button></div>
 </div>
 <div class="row">
-<table class="table">
+<table class="table" [@flyInOut]>
   <thead>
     <tr>
       <th>ID</th>
@@ -13,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of orders">
+    <tr *ngFor="let item of orders" [@fadeIn]>
       <td><a routerLink="../receipt/{{item.id}}">{{item.id}}</a></td>
       <td><a routerLink="../editor/{{item.id}}">Edit</a></td>
       <td><a (click)="deleteOrder(item.id)">Delete</a></td>

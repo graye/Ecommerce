@@ -4,6 +4,7 @@ import { OrderItem } from './order-item';
 import { Http, Response } from '@angular/http';
 import { Operator, Observable } from 'rxjs';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
 
 const ORDERS: Array<Order> = [
   new Order([
@@ -55,8 +56,15 @@ export class OrderService {
       .then(res => {
         this._orders = this.loadData(res.json());
         this.save();
+        return this._orders;
       })
       .catch(reason => []);
+  }
+
+  getOrderFromUrlWithObservable(): Observable<Array<Order>> {
+    return this.http.get(URL).map(res => {
+      return this.loadData(res.json());
+    });
   }
 
   load(): Array<Order> {
