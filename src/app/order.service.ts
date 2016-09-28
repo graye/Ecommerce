@@ -50,8 +50,13 @@ export class OrderService {
     return this._orders;
   }
 
-  getOrderFromUrl() {
-    return this.http.get(URL).toPromise();
+  getOrderFromUrl(): Promise<Array<Order>> {
+    return this.http.get(URL).toPromise()
+      .then(res => {
+        this._orders = this.loadData(res.json());
+        this.save();
+      })
+      .catch(reason => []);
   }
 
   load(): Array<Order> {

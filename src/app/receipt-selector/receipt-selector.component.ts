@@ -12,10 +12,9 @@ export class ReceiptSelectorComponent implements OnInit {
   orders: Array<Order>;
 
   constructor(private orderService: OrderService) {
-    this.orders = orderService.getAllOrder();
-    orderService.getOrderFromUrl().then(res => {
-      console.log(res);
-    });
+    //this.orders = orderService.getAllOrder();
+    this.orders = [];
+    orderService.getOrderFromUrl().then(res => this.orders = orderService.getAllOrder());
   }
 
   ngOnInit() {
