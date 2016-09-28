@@ -13,12 +13,15 @@ export class ReceiptSelectorComponent implements OnInit {
 
   constructor(private orderService: OrderService) {
     this.orders = orderService.getAllOrder();
-   }
+    orderService.getOrderFromUrl().then(res => {
+      console.log(res);
+    });
+  }
 
   ngOnInit() {
   }
 
-  deleteOrder(id: string): void{
+  deleteOrder(id: string): void {
     this.orderService.deleteOrder(id);
   }
 }

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Order } from './order';
 import { OrderItem } from './order-item';
+import { Http, Response } from '@angular/http';
+import { Operator, Observable } from 'rxjs';
+import 'rxjs/add/operator/toPromise';
 
 const ORDERS: Array<Order> = [
   new Order([
@@ -21,13 +24,14 @@ const ORDERS: Array<Order> = [
 
 
 const LOCAL_KEY: string = "order_key";
+const URL: string = "data/orders.json";
 
 @Injectable()
 export class OrderService {
 
   private _orders: Array<Order>;
 
-  constructor() {
+  constructor(private http: Http) {
     this.load();
   }
 
@@ -44,6 +48,10 @@ export class OrderService {
 
   getAllOrder(): Array<Order> {
     return this._orders;
+  }
+
+  getOrderFromUrl() {
+    return this.http.get(URL).toPromise();
   }
 
   load(): Array<Order> {
@@ -87,7 +95,7 @@ export class OrderService {
     this._orders.splice(index, 1);
   }
 
-  loadData(orders_json: Array<any>) {
+  loadData(orders_json: Array<any>): Array<Order> {
     let orders: Array<Order> = [];
     orders_json.forEach((orderItem: any, index: number, arr: any[]) => {
       let items: Array<OrderItem> = [];
