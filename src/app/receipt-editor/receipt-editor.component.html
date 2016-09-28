@@ -1,0 +1,44 @@
+<section *ngIf="order">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Order {{order.id}}</h1>
+    </div>
+  </div>
+  <hr/>
+  <div class="row">
+    <div class="col-md-1">
+      <label>Create Date</label>
+    </div>
+    <div class="col-md-11">
+      <input type="date" class="form-control" [(ngModel)]="orderDateString"/>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Unit Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order_item of order.items">
+          <td><input type="text" class="form-control" placeholder="Item" [(ngModel)]="order_item.item" /></td>
+          <td><input type="number" class="form-control" placeholder="Quantity" [(ngModel)]="order_item.quantity" /></td>
+          <td><input type="number" class="form-control" placeholder="Unit Price" [(ngModel)]="order_item.unit_price" /></td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-default" (click)="addItem()">+</button>
+  </div>
+  <!--<div class="row" *ngFor="let order_item of order.items">
+    <div class="col-md-3"><input class="text" placeholder="Item" [(ngModel)]="order_item.item" /></div>
+    <div class="col-md-3"><input class="text" placeholder="Quantity" [(ngModel)]="order_item.quantity" /></div>
+    <div class="col-md-3"><input class="text" placeholder="Unit Price" [(ngModel)]="order_item.unit_price" /></div>
+  </div>-->
+  <pre>{{order | json}}</pre>
+</section>
+<section *ngIf="!order">
+  <h2>Could not find the order.</h2>
+</section>

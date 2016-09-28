@@ -6,6 +6,8 @@ import { ReceiptSelectorComponent } from './receipt-selector/receipt-selector.co
 
 import { AboutComponent } from './about/about.component';
 
+import { ReceiptEditorComponent } from './receipt-editor/receipt-editor.component';
+
 const appRoutes: Routes = [
     {
         path: '',
@@ -28,6 +30,10 @@ const appRoutes: Routes = [
         path: 'about',
         component: AboutComponent
     },
+    {
+        path: 'editor/:id',
+        component: ReceiptEditorComponent
+    }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
