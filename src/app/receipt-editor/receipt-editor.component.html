@@ -1,7 +1,7 @@
 <section *ngIf="order">
   <div class="row">
     <div class="col-md-12">
-      <h1>Order {{order.id}}</h1>
+      <h1>Order {{order.id}} {{isNew}}</h1>
     </div>
   </div>
   <hr/>
@@ -10,7 +10,7 @@
       <label>Create Date</label>
     </div>
     <div class="col-md-11">
-      <input type="date" class="form-control" [(ngModel)]="orderDateString"/>
+      <input type="date" class="form-control" [(ngModel)]="orderDateString" required/>
     </div>
   </div>
   <div class="row">
@@ -20,17 +20,29 @@
           <th>Item</th>
           <th>Quantity</th>
           <th>Unit Price</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let order_item of order.items">
-          <td><input type="text" class="form-control" placeholder="Item" [(ngModel)]="order_item.item" /></td>
-          <td><input type="number" class="form-control" placeholder="Quantity" [(ngModel)]="order_item.quantity" /></td>
-          <td><input type="number" class="form-control" placeholder="Unit Price" [(ngModel)]="order_item.unit_price" /></td>
+        <tr *ngFor="let order_item of order.items;let i = index">
+          <td><input type="text" class="form-control" placeholder="Item" [(ngModel)]="order_item.item" required/></td>
+          <td><input type="number" min="1" class="form-control" placeholder="Quantity" [(ngModel)]="order_item.quantity" /></td>
+          <td><input type="number" min="0" class="form-control" placeholder="Unit Price" [(ngModel)]="order_item.unit_price"
+            /></td>
+          <td><button class="btn btn-danger" (click)="deleteItem(i)">Delete</button>
+        </tr>
+        <tr>
+          <td colspan="4"><button class="btn btn-default" (click)="addItem()">+</button></td>
         </tr>
       </tbody>
     </table>
-    <button class="btn btn-default" (click)="addItem()">+</button>
+  </div>
+  <div class="row">
+    <div class="col-md-11"></div>
+    <div class="col-md-1"><button class="btn btn-primary" (click)="onsave()">Save</button></div>
+  </div>
+  <div class="debug-mode">
+    Validate Form : {{validate()}}
   </div>
   <!--<div class="row" *ngFor="let order_item of order.items">
     <div class="col-md-3"><input class="text" placeholder="Item" [(ngModel)]="order_item.item" /></div>
@@ -42,3 +54,10 @@
 <section *ngIf="!order">
   <h2>Could not find the order.</h2>
 </section>
+
+<style>
+  .ng-invalid:not(form) {
+    border-left: 5px solid #a94442;
+    /* red */
+  }
+</style>

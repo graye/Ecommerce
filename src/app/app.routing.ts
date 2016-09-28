@@ -33,6 +33,10 @@ const appRoutes: Routes = [
     {
         path: 'editor/:id',
         component: ReceiptEditorComponent
+    },
+    {
+        path: 'editor',
+        component: ReceiptEditorComponent
     }
 ];
 

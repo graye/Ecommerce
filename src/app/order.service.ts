@@ -4,20 +4,20 @@ import { OrderItem } from './order-item';
 
 const ORDERS: Array<Order> = [
   new Order([
-        new OrderItem('Samsung Note7', 1, 100),
-        new OrderItem('MacBook', 1, 200),
-        new OrderItem('Ipad Mini', 2, 250)
-      ]),
-        new Order([
-        new OrderItem('A', 2, 100),
-        new OrderItem('B', 3, 200),
-        new OrderItem('C', 2, 250)
-      ]),
-        new Order([
-        new OrderItem('D', 1, 100),
-        new OrderItem('E', 5, 260),
-        new OrderItem('F', 1, 350)
-      ])];
+    new OrderItem('Samsung Note7', 1, 100),
+    new OrderItem('MacBook', 1, 200),
+    new OrderItem('Ipad Mini', 2, 250)
+  ]),
+  new Order([
+    new OrderItem('A', 2, 100),
+    new OrderItem('B', 3, 200),
+    new OrderItem('C', 2, 250)
+  ]),
+  new Order([
+    new OrderItem('D', 1, 100),
+    new OrderItem('E', 5, 260),
+    new OrderItem('F', 1, 350)
+  ])];
 
 
 const LOCAL_KEY: string = "order_key";
@@ -29,7 +29,7 @@ export class OrderService {
 
   constructor() {
     this.load();
-   }
+  }
 
   getOrder(id: string) {
     let all = this.getAllOrder();
@@ -49,7 +49,7 @@ export class OrderService {
   load(): Array<Order> {
     let datastring = localStorage[LOCAL_KEY];
     let result;
-    if(!datastring) {
+    if (!datastring) {
       this._orders = ORDERS;
       this.save();
     } else {
@@ -63,6 +63,28 @@ export class OrderService {
   save(): void {
     var jsonString = JSON.stringify(this._orders);
     localStorage[LOCAL_KEY] = jsonString;
+  }
+
+  updateOrder(order: Order): void {
+    let index = this._orders.findIndex((value: Order) => {
+      return value.id === order.id;
+    });
+
+    this._orders[index] = order;
+    this.save();
+  }
+
+  addNew(order: Order): void {
+    this._orders.push(order);
+    this.save();
+  }
+
+  deleteOrder(id: string): void {
+    let index = this._orders.findIndex((value: Order) => {
+      return value.id === id;
+    });
+
+    this._orders.splice(index, 1);
   }
 
   loadData(orders_json: Array<any>) {

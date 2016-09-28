@@ -11,11 +11,14 @@ export class ReceiptSelectorComponent implements OnInit {
 
   orders: Array<Order>;
 
-  constructor(orderService: OrderService) {
+  constructor(private orderService: OrderService) {
     this.orders = orderService.getAllOrder();
    }
 
   ngOnInit() {
   }
 
+  deleteOrder(id: string): void{
+    this.orderService.deleteOrder(id);
+  }
 }
